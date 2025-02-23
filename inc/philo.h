@@ -6,7 +6,7 @@
 /*   By: joyim <joyim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 08:08:06 by joyim             #+#    #+#             */
-/*   Updated: 2025/02/23 12:23:59 by joyim            ###   ########.fr       */
+/*   Updated: 2025/02/23 15:36:31 by joyim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@
 # define THREAD_ERROR -5
 # define MAX_PHILO 200
 
-# define TAKE_FORKS "has taken a fork"
-# define THINK "is thinking"
-# define SLEEP "is sleeping"
-# define EAT "is eating"
-# define DIED "died"
+// # define TAKE_FORKS "has taken a fork"
+// # define THINK "is thinking"
+// # define SLEEP "is sleeping"
+// # define EAT "is eating"
+// # define DIED "died"
 
 # define ERR_MSG_ARG "Arg Error: ./philo\n\
 1 - <total_philos>\n\
@@ -51,12 +51,12 @@
 
 typedef enum e_status
 {
-	EATING = 0,
-	SLEEPING = 1,
-	THINKING = 2,
-	DEAD = 3,
-	FULL = 4,
-	IDLE = 5,
+	DIED = 0,
+	EATING = 1,
+	SLEEPING = 2,
+	THINKING = 3,
+	GOT_FORK_1 = 4,
+	GOT_FORK_2 = 5
 }	t_status;
 
 typedef struct s_philo{
@@ -111,7 +111,7 @@ void	destroy_mutexes(t_data *data);
 
 // routine.c
 void *routine(void *data);
-// void single_philo_function();
+void *single_philo(t_philo *philo);
 
 
 // libft_utils

@@ -6,7 +6,7 @@
 /*   By: joyim <joyim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 08:07:13 by joyim             #+#    #+#             */
-/*   Updated: 2025/02/23 12:25:03 by joyim            ###   ########.fr       */
+/*   Updated: 2025/02/23 15:29:17 by joyim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,38 @@ int main(int ac, char **av)
 	}
 	init(&data, ac, av);
 	print_philo_data(&data);
-	// execution(&data);
-	printf("hello");
+	execution(&data);
 	exit_execution(&data);
 	return (0);
 }
 
+void execution(t_data *data)
+{
+	int	i;
 
+	i = 0;
+	if(pthread_create(&data->philo[i].thread, NULL, routine, \
+		(void *)&data->philo[i]) == 0)
+		printf("hello1");
+
+}
+
+void *routine (void *data)
+{
+	t_philo *philo;
+
+	philo = (t_philo *)data;
+	if (philo->data->nb_philos == 1)
+		return (single_philo(philo));
+	
+}
+
+void *single_philo(t_philo *philo)
+{
+	printf("hello2");
+	pthread_mutex_lock(&philo->data->lock_forks[philo->fork[0]]);
+	print_action(philo, GOT_FORK_1);
+}
 
 void exit_execution(t_data *data)
 {
